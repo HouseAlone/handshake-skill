@@ -1,0 +1,3 @@
+interface:
+  display_name: "Handshake"
+  short_description: "Save or resume compact context for a project and branch"
