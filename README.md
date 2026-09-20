@@ -1,6 +1,6 @@
 # Handshake
 
-**A branch-aware agent skill that saves compact project context so a fresh AI coding session can continue work without carrying an entire prior chat.**
+**A branch-aware Codex skill that saves compact project context, relevant skills, blockers, and next actions so you can start a fresh chat and continue work seamlessly—without carrying unnecessary history or wasting tokens.**
 
 Handshake records the durable information an agent needs to pick up a project: current state, verified work, blockers, relevant skills, and ordered next actions. It keeps one summary per Git project and branch, reducing irrelevant context while preserving the details that move work forward.
 
