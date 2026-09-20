@@ -1,10 +1,34 @@
-# Handshake Skill
+# Handshake
 
-A compact, branch-scoped session handoff skill for Codex. It saves one concise Markdown summary per project and branch, then loads it in a later chat so work can resume with the goal, current state, verification, blockers, relevant skills, and next actions intact.
+**A branch-aware agent skill that saves compact project context so a fresh AI coding session can continue work without carrying an entire prior chat.**
 
-## Install
+Handshake records the durable information an agent needs to pick up a project: current state, verified work, blockers, relevant skills, and ordered next actions. It keeps one summary per Git project and branch, reducing irrelevant context while preserving the details that move work forward.
 
-Copy the `handshake` directory into your Codex skills directory:
+## Why Handshake
+
+Long agent sessions accumulate conversation history that is expensive and often irrelevant to the next task. Handshake closes a session with a compact, actionable summary, then opens the next session by restoring and verifying only the context needed to continue.
+
+- **Fresh-session continuity** — continue from the first unfinished action.
+- **Branch-aware context** — never load a summary from another branch.
+- **Relevant skill memory** — retain only skills that support remaining work.
+- **Compact by design** — preserve decisions, verification, blockers, and next actions instead of raw transcripts.
+
+## Compatibility
+
+| Environment | Installation | Invocation |
+| --- | --- | --- |
+| Codex | Copy `handshake/` to `~/.codex/skills/handshake/` | `$handshake` or `$handshake close` |
+| Claude Code | Load this repository as a plugin | `/handshake:handshake` or `/handshake:handshake close` |
+
+The saved handshake is shared across compatible installations on the same computer:
+
+```text
+~/codex-session-handshakes/<project-key>/handshake-<branch>.md
+```
+
+## Install for Codex
+
+Copy the standalone skill into your personal Codex skills directory:
 
 ```bash
 cp -R handshake ~/.codex/skills/handshake
@@ -12,24 +36,57 @@ cp -R handshake ~/.codex/skills/handshake
 
 Restart Codex if the skill does not appear automatically.
 
-## Use
+## Use in Codex
 
-Start or resume a project session:
+Open a project session and continue from its saved context:
 
 ```text
 $handshake
 ```
 
-At the end of a session, save the compact continuation context:
+Close the current session and replace its compact continuation context:
 
 ```text
 $handshake close
 ```
 
-The saved file lives outside the repository, under:
+## Use as a Claude Code Plugin
 
-```text
-~/codex-session-handshakes/<project-key>/handshake-<branch>.md
+Test the plugin directly from a local clone:
+
+```bash
+claude --plugin-dir .
 ```
 
-Different branches keep separate context. Closing a session replaces only that branch's prior handshake.
+Then use the namespaced skill:
+
+```text
+/handshake:handshake
+/handshake:handshake close
+```
+
+The repository includes the required `.claude-plugin/plugin.json` manifest and `skills/handshake/` package. It can be submitted to the Claude Code community marketplace after validation.
+
+## How It Works
+
+1. **Open:** Locate the current Git project and branch, then read that branch's handshake file if it exists.
+2. **Verify:** Compare the saved state with the actual repository before continuing.
+3. **Continue:** Start the first unresolved next action unless a blocker or decision requires input.
+4. **Close:** Replace the branch handshake with a concise summary for the next session.
+
+## Repository Layout
+
+```text
+handshake/                         # Standalone Codex skill
+.claude-plugin/plugin.json         # Claude Code plugin manifest
+skills/handshake/                  # Claude Code plugin skill
+LICENSE                            # MIT
+```
+
+## Contributing
+
+Issues and pull requests are welcome. Keep changes focused on reliable cross-session continuity and compact, durable project context.
+
+## License
+
+[MIT](LICENSE)

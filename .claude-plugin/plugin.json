@@ -1,0 +1,9 @@
+{
+  "name": "handshake",
+  "description": "Save compact, branch-aware project context and continue work in a fresh Claude Code session.",
+  "version": "1.0.0",
+  "author": {
+    "name": "HouseAlone"
+  },
+  "license": "MIT"
+}
