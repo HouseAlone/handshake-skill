@@ -70,10 +70,10 @@ def metadata(root: Path, mode: str) -> dict[str, str | None]:
     }
 
 
-def do_resume(cwd: Path) -> None:
+def do_open(cwd: Path) -> None:
     root = project_root(cwd)
     found = handshake_path(root)
-    payload = metadata(root, "resume")
+    payload = metadata(root, "open")
     payload["handshake"] = str(found) if found.is_file() else None
     print(json.dumps(payload, indent=2))
 
@@ -89,13 +89,13 @@ def do_close(cwd: Path) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument("mode", choices=["resume", "close"])
+    parser.add_argument("mode", choices=["open", "close"])
     parser.add_argument("--cwd", default=os.getcwd())
     args = parser.parse_args()
 
     cwd = Path(args.cwd).expanduser().resolve()
-    if args.mode == "resume":
-        do_resume(cwd)
+    if args.mode == "open":
+        do_open(cwd)
     else:
         do_close(cwd)
     return 0

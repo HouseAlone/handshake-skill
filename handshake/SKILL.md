@@ -1,6 +1,6 @@
 ---
 name: handshake
-description: "Resume or close a Codex work session with one compact, branch-scoped handshake that records the current state, unresolved work, and ordered next actions."
+description: "Open or close a Codex work session with one compact, branch-scoped handshake that records the current state, unresolved work, and ordered next actions."
 ---
 
 # Session Handshake
@@ -19,7 +19,7 @@ Use `scripts/session_handshake.py` for file discovery and path creation. It stor
 
 ## Mode Resolution
 
-A bare `$handshake` means **resume**. Run the resume flow immediately; do not ask the user whether this is the start or end of a session.
+A bare `$handshake` means **open**. Run the open flow immediately; do not ask the user whether this is the start or end of a session.
 
 Only use the close flow when the user explicitly says `$handshake close`, or clearly asks to close, save, summarize, or end the session. This prevents a newly opened chat from overwriting the compact context it needs to load.
 
@@ -28,10 +28,10 @@ Only use the close flow when the user explicitly says `$handshake close`, or cle
 When the user invokes this skill at the beginning of work, first run:
 
 ```bash
-python3 <skill-dir>/scripts/session_handshake.py resume --cwd <current-working-directory>
+python3 <skill-dir>/scripts/session_handshake.py open --cwd <current-working-directory>
 ```
 
-If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm resuming.
+If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm opening the session.
 
 Pause only when the handshake records a blocker, an open question that materially affects the next action, or no remaining action. Say exactly what is needed in that case.
 
