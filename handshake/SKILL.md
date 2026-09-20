@@ -31,7 +31,9 @@ When the user invokes this skill at the beginning of work, first run:
 python3 <skill-dir>/scripts/session_handshake.py resume --cwd <current-working-directory>
 ```
 
-If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Tell the user which handshake was loaded, including the project path and timestamp. Lead the response with a compact continuation briefing: the goal, where work stopped, what was verified, blockers, and the ordered next actions. Do not silently begin a next action until the user asks to continue.
+If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm resuming.
+
+Pause only when the handshake records a blocker, an open question that materially affects the next action, or no remaining action. Say exactly what is needed in that case.
 
 If no handshake is found, say that no compact context exists for this project and branch yet and continue normally. Do not imply that the contents of another chat were recovered; inspect the repository to establish current state instead.
 
