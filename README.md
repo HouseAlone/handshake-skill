@@ -1,6 +1,6 @@
 # Handshake Skill
 
-A compact, branch-scoped session handoff skill for Codex. It saves one concise Markdown summary per project and branch, then loads it in a later chat so work can resume with the goal, current state, verification, blockers, and next actions intact.
+A branch-aware Codex skill that saves compact project context, relevant skills, blockers, and next actions so you can start a fresh chat and continue work seamlessly—without carrying unnecessary history or wasting tokens.
 
 ## Install
 
