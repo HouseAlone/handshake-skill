@@ -31,7 +31,7 @@ When the user invokes this skill at the beginning of work, first run:
 python3 <skill-dir>/scripts/session_handshake.py open --cwd <current-working-directory>
 ```
 
-If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm opening the session.
+If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Read the **Relevant Skill Memory** section before continuing. Use a listed skill only when it applies to the next action; do not load every past skill merely because it was recorded. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, relevant skills, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm opening the session.
 
 Pause only when the handshake records a blocker, an open question that materially affects the next action, or no remaining action. Say exactly what is needed in that case.
 
@@ -55,10 +55,13 @@ The handshake should include only durable context that helps the next session:
 - Commands run and verification status
 - Decisions and constraints
 - Known issues or blockers
+- Relevant skill memory
 - Ordered next actions
 - Open questions
 
 At close, turn any unfinished work into an actionable continuation list. Each item must say what to do, why it remains, and the relevant file, command, or decision when known. Put the immediate next action first. Include only work that still needs attention; omit completed work. If nothing remains, state that explicitly.
+
+Also record a **Relevant Skill Memory** section. List only skills used in this session that will materially help complete an unfinished next action. For each, include its exact invocation name, which next action it supports, and a brief reason. Remove skills that are no longer useful, and write `None` when no skill needs to carry forward. If a listed skill is unavailable in the new session, mention that only when it blocks the next action; never install it automatically.
 
 Avoid dumping raw logs, long transcripts, or large diffs unless the next session truly needs them. Prefer exact file paths, commands, commit/branch names, and error messages over broad narrative.
 
@@ -80,6 +83,10 @@ Avoid dumping raw logs, long transcripts, or large diffs unless the next session
 ## Verification
 
 ## Decisions and Constraints
+
+## Relevant Skill Memory
+
+- `$<skill-name>` — Supports next action <number>: <why it is useful>.
 
 ## Next Actions
 
