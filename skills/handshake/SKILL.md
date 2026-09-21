@@ -36,7 +36,7 @@ First run:
 python3 <skill-dir>/scripts/session_handshake.py open --cwd <current-working-directory>
 ```
 
-If a handshake is found, read it before doing project work. Use it as context, then verify against the actual repository/files before making changes. Read the **Relevant Skill Memory** section before continuing. Use a listed skill only when it applies to the next action; do not load every past skill merely because it was recorded. Give a compact continuation briefing: the goal, where work stopped, what was verified, blockers, relevant skills, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm opening the session.
+If a handshake is found, read it before doing project work. Read its sections in this order: **Macro Vision & Architectural Context**, **File Anchors**, **Relevant Skill Memory**, then **Next Actions**. Inspect the anchored files first and verify the saved state against the actual repository before making changes; do not scan broad directories unless the anchors are insufficient. Use a listed skill only when it applies to the next action; do not load every past skill merely because it was recorded. Give a compact continuation briefing: the goal, where work stopped, the macro context, what was verified, blockers, relevant skills, and the ordered next actions. Then continue directly with the first unresolved next action. Do not ask the user to confirm opening the session.
 
 Pause only when the handshake records a blocker, an open question that materially affects the next action, or no remaining action. Say exactly what is needed in that case.
 
@@ -56,15 +56,19 @@ The handshake should include only durable context that helps the next session:
 
 - Goal
 - Current state
-- Important files and symbols
+- Macro vision and architectural context
+- File anchors
 - Commands run and verification status
 - Decisions and constraints
 - Known issues or blockers
 - Relevant skill memory
-- Ordered next actions
+- Up to three ordered, immediate next actions
+- A compact pointer to deferred work, when applicable
 - Open questions
 
-At close, turn any unfinished work into an actionable continuation list. Each item must say what to do, why it remains, and the relevant file, command, or decision when known. Put the immediate next action first. Include only work that still needs attention; omit completed work. If nothing remains, state that explicitly.
+At close, write **Macro Vision & Architectural Context** as no more than three short bullets: the business purpose, the relevant system boundary or cross-language flow, and an architectural invariant that must not be broken. Write **File Anchors** with three to eight paths relative to the repository root. For each anchor, name the relevant symbol or component and why the next session needs it. Include only direct source dependencies and essential configuration; never use whole directories as anchors.
+
+Turn unfinished work into an actionable continuation list of at most three sequential, immediate steps. Each item must say what to do, why it remains, and the relevant file, command, or decision when known. Put the immediate next action first. Omit completed work and do not embed a long backlog. If further work exists, record only one compact **Deferred Work** pointer to its issue, ticket, backlog file, or `None`. If nothing remains, state that explicitly.
 
 Also record a **Relevant Skill Memory** section. List only skills used in this session that will materially help complete an unfinished next action. For each, include its exact invocation name, which next action it supports, and a brief reason. Remove skills that are no longer useful, and write `None` when no skill needs to carry forward. If a listed skill is unavailable in the new session, mention that only when it blocks the next action; never install it automatically.
 
@@ -83,7 +87,15 @@ Avoid dumping raw logs, long transcripts, or large diffs unless the next session
 
 ## Current State
 
-## Important Files
+## Macro Vision & Architectural Context
+
+- Business purpose: <one concise line>
+- System boundary or flow: <one concise line>
+- Do not break: <one concise line>
+
+## File Anchors
+
+- `<repository-relative-path>` — `<symbol or component>`: <why this is needed next>.
 
 ## Verification
 
@@ -97,6 +109,11 @@ Avoid dumping raw logs, long transcripts, or large diffs unless the next session
 
 1. **<action>** — Why it remains: <reason>. Context: `<file>`, `<command>`, or <decision>.
 2. **<action>** — Why it remains: <reason>. Context: <context>.
+3. **<action>** — Why it remains: <reason>. Context: <context>.
+
+## Deferred Work
+
+- `<issue, ticket, or backlog path>` — or `None`.
 
 ## Open Questions
 ```

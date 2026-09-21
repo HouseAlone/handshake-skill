@@ -11,7 +11,7 @@ Long agent sessions accumulate conversation history that is expensive and often 
 - **Fresh-session continuity** — continue from the first unfinished action.
 - **Branch-aware context** — never load a summary from another branch.
 - **Relevant skill memory** — retain only skills that support remaining work.
-- **Compact by design** — preserve decisions, verification, blockers, and next actions instead of raw transcripts.
+- **High-density context** — capture macro architecture, 3–8 precise file anchors, and at most three immediate next actions instead of raw transcripts.
 
 ## Compatibility
 
@@ -72,7 +72,7 @@ The repository includes the required `.claude-plugin/plugin.json` manifest and `
 1. **Open:** Locate the current Git project and branch, then read that branch's handshake file if it exists.
 2. **Verify:** Compare the saved state with the actual repository before continuing.
 3. **Continue:** Start the first unresolved next action unless a blocker or decision requires input.
-4. **Close:** Replace the branch handshake with a concise summary for the next session.
+4. **Close:** Replace the branch handshake with macro architecture, targeted file anchors, and at most three immediate next steps for the next session.
 
 ## Repository Layout
 
