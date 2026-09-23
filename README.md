@@ -18,6 +18,45 @@ Instead of transferring entire conversations, developers transfer durable projec
 
 This makes new Codex or Claude Code sessions faster to start, easier to understand, and significantly more token-efficient.
 
+## How Handshake works
+
+```text
+┌───────────────────────┐
+│   AI Coding Session   │
+│  Codex / Claude Code  │
+└───────────┬───────────┘
+            │
+            ▼
+   $handshake close
+            │
+            ▼
+┌───────────────────────┐
+│   Compact Handoff     │
+│                       │
+│ • Project state       │
+│ • Relevant files      │
+│ • Decisions           │
+│ • Git branch          │
+│ • Blockers            │
+│ • Next steps          │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│   Fresh AI Session    │
+│  Codex / Claude Code  │
+└───────────┬───────────┘
+            │
+            ▼
+      $handshake
+            │
+            ▼
+┌───────────────────────┐
+│ Continue development  │
+│ without rebuilding    │
+│ project context       │
+└───────────────────────┘
+```
 ## Compatibility
 
 | Environment | Installation | Invocation |
