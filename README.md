@@ -1,18 +1,67 @@
-# Handshake
+# What is Handshake?
 
-**A branch-aware Codex skill that saves compact project context, relevant skills, blockers, and next actions so you can start a fresh chat and continue work seamlessly—without carrying unnecessary history or wasting tokens.**
+Handshake is an open-source **session handoff and context management skill** for **Codex** and **Claude Code**.
 
-Handshake records the durable information an agent needs to pick up a project: current state, verified work, blockers, relevant skills, and ordered next actions. It keeps one summary per Git project and branch, reducing irrelevant context while preserving the details that move work forward.
+It helps AI coding agents continue software projects across fresh sessions by generating a compact project handoff instead of relying on long conversation histories.
 
-## Why Handshake
+Each handoff preserves the durable information needed to resume work immediately, including project state, architecture decisions, relevant files, active Git branch, blockers, and next steps.
 
-Long agent sessions accumulate conversation history that is expensive and often irrelevant to the next task. Handshake closes a session with a compact, actionable summary, then opens the next session by restoring and verifying only the context needed to continue.
+The result is faster onboarding, lower token usage, and more consistent AI-assisted software development.
+
+## Why Handshake?
+
+AI coding sessions naturally grow over time. As conversations become longer, starting a fresh session often means copying large amounts of context or manually rebuilding the project's state.
+
+Handshake replaces this workflow with a structured, branch-aware handoff that contains only the information required to continue development.
+
+Instead of transferring entire conversations, developers transfer durable project knowledge.
+
+This makes new Codex or Claude Code sessions faster to start, easier to understand, and significantly more token-efficient.
 
 - **Fresh-session continuity** — continue from the first unfinished action.
 - **Branch-aware context** — never load a summary from another branch.
 - **Relevant skill memory** — retain only skills that support remaining work.
 - **Rolling context** — recycle verified architecture, file anchors, decisions, and skill memory; refresh only the state that changed.
 
+## How Handshake works
+
+```text
+┌───────────────────────┐
+│   AI Coding Session   │
+│  Codex / Claude Code  │
+└───────────┬───────────┘
+            │
+            ▼
+   $handshake close
+            │
+            ▼
+┌───────────────────────┐
+│   Compact Handoff     │
+│                       │
+│ • Project state       │
+│ • Relevant files      │
+│ • Decisions           │
+│ • Git branch          │
+│ • Blockers            │
+│ • Next steps          │
+└───────────┬───────────┘
+            │
+            ▼
+┌───────────────────────┐
+│   Fresh AI Session    │
+│  Codex / Claude Code  │
+└───────────┬───────────┘
+            │
+            ▼
+      $handshake
+            │
+            ▼
+┌───────────────────────┐
+│ Continue development  │
+│ without rebuilding    │
+│ project context       │
+└───────────────────────┘
+```
 ## Compatibility
 
 | Environment | Installation | Invocation |
