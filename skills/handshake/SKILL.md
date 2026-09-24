@@ -50,7 +50,7 @@ Create a concise Markdown handshake for the current project and branch. First ru
 python3 <skill-dir>/scripts/session_handshake.py close --cwd <current-working-directory>
 ```
 
-The script prints the exact file path to write. Replace that branch's existing handshake at this path.
+The script prints the exact file path to write. If a handshake already exists at that path, read it before writing. The file remains one compact, rolling snapshot for the current project and branch; do not create a new report or append a session log.
 
 The handshake should include only durable context that helps the next session:
 
@@ -70,6 +70,12 @@ At close, write **Macro Vision & Architectural Context** as no more than three s
 
 Turn unfinished work into an actionable continuation list of at most three sequential, immediate steps. Each item must say what to do, why it remains, and the relevant file, command, or decision when known. Put the immediate next action first. Omit completed work and do not embed a long backlog. If further work exists, record only one compact **Deferred Work** pointer to its issue, ticket, backlog file, or `None`. If nothing remains, state that explicitly.
 
+## Rolling Update Rules
+
+Preserve verified, still-relevant context verbatim: the goal, macro architecture, decisions and constraints, file anchors, and relevant skill memory. Update only the parts changed by the current session: current state, verification, blockers, open questions, and next actions. Remove completed actions, stale anchors, obsolete skills, and decisions that no longer hold.
+
+Use **Session Delta** for only the material changes since the previous close. At the next close, merge useful delta information into the durable sections and replace the delta; it must never become a chronological history. Update the `Last updated` timestamp every close. Keep the complete handshake compact enough to read in one pass.
+
 Also record a **Relevant Skill Memory** section. List only skills used in this session that will materially help complete an unfinished next action. For each, include its exact invocation name, which next action it supports, and a brief reason. Remove skills that are no longer useful, and write `None` when no skill needs to carry forward. If a listed skill is unavailable in the new session, mention that only when it blocks the next action; never install it automatically.
 
 Avoid dumping raw logs, long transcripts, or large diffs unless the next session truly needs them. Prefer exact file paths, commands, commit/branch names, and error messages over broad narrative.
@@ -81,7 +87,7 @@ Avoid dumping raw logs, long transcripts, or large diffs unless the next session
 
 - Project: `<absolute project path>`
 - Branch: `<branch or unknown>`
-- Created: `<ISO timestamp>`
+- Last updated: `<ISO timestamp>`
 
 ## Goal
 
@@ -116,4 +122,8 @@ Avoid dumping raw logs, long transcripts, or large diffs unless the next session
 - `<issue, ticket, or backlog path>` — or `None`.
 
 ## Open Questions
+
+## Session Delta
+
+- <material change since the preceding close, or `None`>
 ```
